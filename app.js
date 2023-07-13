@@ -10,6 +10,7 @@ const app = express()
 
 const port = process.env.PORT || 3000
 const routes = require('./routes')
+const passport = require('./config/passport')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -22,8 +23,8 @@ app.use(
   })
 )
 app.use(cors())
-// app.use(passport.initialize())
-// app.use(passport.session())
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/api', routes)
 
