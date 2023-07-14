@@ -3,8 +3,9 @@ CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
     `account` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NOT NULL,
-    `type` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `type` VARCHAR(191) NULL,
 
     UNIQUE INDEX `User_account_key`(`account`),
     PRIMARY KEY (`id`)
