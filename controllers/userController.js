@@ -37,6 +37,23 @@ const userController = {
       })
       .catch((error) => next(error))
   },
+  signIn: (req, res, next) => {
+    try {
+      console.log(req.user)
+      const { password, ...userData } = req.user
+      if (userData.type !== 'User')
+        throw createError(403, 'Access to the requested resource is forbidden')
+      const token = jwt.sign(userData, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+      })
+      res.json({
+        token,
+        user: userData,
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
 }
 
 module.exports = userController
