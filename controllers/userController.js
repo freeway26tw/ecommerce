@@ -39,7 +39,6 @@ const userController = {
   },
   signIn: (req, res, next) => {
     try {
-      console.log(req.user)
       const { password, ...userData } = req.user
       if (userData.type !== 'User')
         throw createError(403, 'Access to the requested resource is forbidden')
