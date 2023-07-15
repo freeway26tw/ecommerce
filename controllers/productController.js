@@ -11,6 +11,25 @@ const productController = {
       next(err)
     }
   },
+  postProducts: async (req, res, next) => {
+    try {
+      const { sellerId, name, category, price, active } = req.body
+      const { files } = req
+      const newProduct = await prisma.product.create({
+        data: {
+          sellerId,
+          name,
+          category,
+          price,
+          active: Boolean(active),
+          image: files.image[0].path,
+        },
+      })
+      return res.json(newProduct)
+    } catch (err) {
+      next(err)
+    }
+  },
 }
 
 module.exports = productController
