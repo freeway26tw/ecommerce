@@ -10,6 +10,18 @@ const productController = {
     } catch (err) {
       next(err)
     }
+  }, 
+  getProduct: async (req, res, next) => {
+    try {
+      const product = await prisma.product.findUnique({
+        where: {
+          id: req.params.productId
+        }
+      })
+      return res.json(product)
+    } catch(err) {
+      next(err)
+    }
   },
   postProducts: async (req, res, next) => {
     try {
