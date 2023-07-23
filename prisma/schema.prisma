@@ -12,8 +12,8 @@ model User {
   account       String    @unique
   password      String
   name          String?
-  email         String
-  type          String?
+  avatar        String?
+  type          String   @default("user")
   Shipping_Cart Cart[]
   Product       Product[]
 }

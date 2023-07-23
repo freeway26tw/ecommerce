@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
 router.post(
-  '/signIn',
+  '/login',
   passport.authenticate('local', { session: false }),
   (req, res, next) => {
   try {
@@ -17,8 +17,9 @@ router.post(
       expiresIn: '30d',
     })
     res.json({
-      token,
-      user: userData,
+      code: 1,
+      msg: 'Success',
+      result: {...userData, token},
     })
   } catch (error) {
     next(error)
