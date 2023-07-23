@@ -8,14 +8,46 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  account       String    @unique
+  id            String         @id @default(uuid())
+  account       String         @unique
   password      String
   name          String?
   avatar        String?
-  type          String   @default("user")
+  type          String         @default("user")
   Shipping_Cart Cart[]
   Product       Product[]
+  User_Address  User_Address[]
+  Order         Order[]
+}
+
+model User_Address {
+  id       String @id @default(uuid())
+  userId   String
+  address1 String
+  address2 String
+  city     String
+  zip      String
+  country  String
+  mobile   String
+  user     User   @relation(fields: [userId], references: [id])
+}
+
+model Order {
+  id          String        @id @default(uuid())
+  userId      String
+  total       Int
+  paymentId   String
+  user        User          @relation(fields: [userId], references: [id])
+  OrderDetail OrderDetail[]
+}
+
+model OrderDetail {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Cart {
@@ -35,21 +67,55 @@ model Cart_Item {
 }
 
 model Product {
-  id        String      @id @default(uuid())
-  seller    User        @relation(fields: [sellerId], references: [id])
-  sellerId  String
-  name      String
-  image     String
-  category  String
-  price     Decimal
-  active    Boolean
-  Cart_Item Cart_Item[]
-  Inventory Inventory[]
+  id             String           @id @default(uuid())
+  seller         User             @relation(fields: [sellerId], references: [id])
+  sellerId       String
+  name           String
+  image          String
+  categoryId     String
+  subCategoryId  String
+  active         Boolean
+  Cart_Item      Cart_Item[]
+  OrderDetail    OrderDetail[]
+  category       Category         @relation(fields: [categoryId], references: [id])
+  subCategory    SubCategory      @relation(fields: [subCategoryId], references: [id])
+  ProductVariant ProductVariant[]
 }
 
-model Inventory {
+model ProductVariant {
   id        String  @id @default(uuid())
-  product   Product @relation(fields: [productId], references: [id])
   productId String
-  stock     Int
+  product   Product @relation(fields: [productId], references: [id])
+  name      String
+  price     Decimal
+  quantity  Int
+  picture   String
+}
+
+model Category {
+  id             String           @id @default(uuid())
+  name           String
+  picture        String
+  desc           String
+  Product        Product[]
+  SubCategory    SubCategory[]
+  CategoryBanner CategoryBanner[]
+}
+
+model SubCategory {
+  id         String    @id @default(uuid())
+  name       String
+  categoryId String
+  picture    String
+  desc       String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  Product    Product[]
+}
+
+model CategoryBanner {
+  id         String   @id @default(uuid())
+  categoryId String
+  picture    String
+  type       Int
+  category   Category @relation(fields: [categoryId], references: [id])
 }
