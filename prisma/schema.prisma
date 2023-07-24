@@ -8,19 +8,19 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  account       String         @unique
+  id            String        @id @default(uuid())
+  account       String        @unique
   password      String
   name          String?
   avatar        String?
-  type          String         @default("user")
+  type          String        @default("user")
   Shipping_Cart Cart[]
   Product       Product[]
-  User_Address  User_Address[]
+  User_Address  UserAddress[]
   Order         Order[]
 }
 
-model User_Address {
+model UserAddress {
   id       String @id @default(uuid())
   userId   String
   address1 String
@@ -51,13 +51,13 @@ model OrderDetail {
 }
 
 model Cart {
-  id        String      @id @default(uuid())
-  user      User        @relation(fields: [userId], references: [id])
+  id        String     @id @default(uuid())
+  user      User       @relation(fields: [userId], references: [id])
   userId    String
-  Cart_Item Cart_Item[]
+  Cart_Item CartItem[]
 }
 
-model Cart_Item {
+model CartItem {
   id        String  @id @default(uuid())
   cart      Cart    @relation(fields: [cartId], references: [id])
   cartId    String
@@ -71,11 +71,11 @@ model Product {
   seller         User             @relation(fields: [sellerId], references: [id])
   sellerId       String
   name           String
-  image          String
+  picture        String
   categoryId     String
   subCategoryId  String
   active         Boolean
-  Cart_Item      Cart_Item[]
+  Cart_Item      CartItem[]
   category       Category         @relation(fields: [categoryId], references: [id])
   subCategory    SubCategory      @relation(fields: [subCategoryId], references: [id])
   ProductVariant ProductVariant[]
@@ -86,6 +86,7 @@ model ProductVariant {
   productId   String
   product     Product       @relation(fields: [productId], references: [id])
   name        String
+  desc        String
   price       Decimal
   quantity    Int
   picture     String
