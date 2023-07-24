@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
 router.post(
-  '/login',
+  '/',
   passport.authenticate('local', { session: false }),
   (req, res, next) => {
   try {
@@ -25,23 +25,6 @@ router.post(
     next(error)
   }
 }
-)
-router.post('/', async (req, res, next) => {
-    try {
-      const { email, password, account, name } = req.body
-
-      if (password !== req.body.checkPassword)
-        throw createError(400, 'Passwords do not match!')
-
-      if (await checkUserExist(account, email)) {
-        throw createError(409, 'This account/email is already registered')
-      }
-      const newUser = await createUser(req.body)
-      return res.json(newUser)
-    } catch (err) {
-      next(err)
-    }
-  }
 )
 
 module.exports = router

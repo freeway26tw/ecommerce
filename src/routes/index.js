@@ -7,7 +7,7 @@ const categoryRoute = require('../domains/categories')
 const { apiErrorHandler } = require('../middleware/error-handler')
 
 router.use('/category', categoryRoute)
-router.use('/users', userRoute)
+router.use('/login', loginRoute)
 router.use('/products', productRoute)
 router.use('/', apiErrorHandler)
 

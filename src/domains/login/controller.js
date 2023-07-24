@@ -18,20 +18,7 @@ const userController = {
     } catch (err) {
       throw createError(500, 'checkUserExist Error')
     }
-  },
-  createUser: async (data) => {
-    try {
-      delete data.checkPassword
-      const bcryptPassword = await bcrypt.hash(data.password, 10)
-      const newUser = await prisma.User.create({
-        data: { ...data, password: bcryptPassword, type: 'User' },
-      })
-      delete newUser.password
-      return newUser
-    } catch (err) {
-      throw createError(500, 'createUser Error')
-    }
-  },
+  }
 }
 
 module.exports = userController
