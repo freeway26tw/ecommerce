@@ -7,7 +7,7 @@ const JWTStrategy = passportJWT.Strategy
 const ExtractJWT = passportJWT.ExtractJwt
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
-const { checkUserExist } = require('../domains/users/controller.js')
+const { checkUserExist } = require('../domains/login/controller.js')
 
 passport.use(
   new LocalStrategy(
