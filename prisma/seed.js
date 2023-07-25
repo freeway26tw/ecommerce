@@ -74,9 +74,9 @@ async function main() {
   await prisma.order.create({
     data: {
       userId: user.id,
-      OrderDetails: {
+      OrderDetail: {
         create: {
-          ProductVariantId: newProductVariant.id,
+          productVariantId: newProductVariant.id,
           quantity: 1
         },
       },
