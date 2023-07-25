@@ -13,7 +13,7 @@ model User {
   password      String
   name          String?
   avatar        String?
-  type          String        @default("user")
+  type          String        @default("User")
   Shipping_Cart Cart[]
   Product       Product[]
   User_Address  UserAddress[]

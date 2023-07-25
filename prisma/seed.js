@@ -14,7 +14,7 @@ async function main() {
       account: 'titaner',
       password: 'titaner',
       name: 'yoooo',
-      type: 'seller',
+      type: 'Seller',
     },
   })
   const category = await prisma.category.create({
