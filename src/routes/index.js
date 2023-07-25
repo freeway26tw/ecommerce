@@ -4,10 +4,13 @@ const router = express.Router()
 const loginRoute = require('../domains/login')
 const productRoute = require('../domains/products')
 const categoryRoute = require('../domains/categories')
+const homeRoute = require('../domains/home')
 const { apiErrorHandler } = require('../middleware/error-handler')
 
-router.use('/category', categoryRoute)
 router.use('/login', loginRoute)
+
+router.use('/category', categoryRoute)
+router.use('/home', homeRoute)
 router.use('/products', productRoute)
 router.use('/', apiErrorHandler)
 

@@ -18,18 +18,22 @@ model User {
   Product       Product[]
   User_Address  UserAddress[]
   Order         Order[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model UserAddress {
-  id       String @id @default(uuid())
-  userId   String
-  address1 String
-  address2 String
-  city     String
-  zip      String
-  country  String
-  mobile   String
-  user     User   @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  userId    String
+  address1  String
+  address2  String
+  city      String
+  zip       String
+  country   String
+  mobile    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
@@ -39,6 +43,8 @@ model Order {
   paymentId   String
   user        User          @relation(fields: [userId], references: [id])
   OrderDetail OrderDetail[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 model OrderDetail {
@@ -48,6 +54,8 @@ model OrderDetail {
   quantity         Int
   order            Order          @relation(fields: [orderId], references: [id])
   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model Cart {
@@ -55,15 +63,19 @@ model Cart {
   user      User       @relation(fields: [userId], references: [id])
   userId    String
   Cart_Item CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model CartItem {
-  id        String  @id @default(uuid())
-  cart      Cart    @relation(fields: [cartId], references: [id])
+  id        String   @id @default(uuid())
+  cart      Cart     @relation(fields: [cartId], references: [id])
   cartId    String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
   productId String
   quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -79,6 +91,8 @@ model Product {
   category       Category         @relation(fields: [categoryId], references: [id])
   subCategory    SubCategory      @relation(fields: [subCategoryId], references: [id])
   ProductVariant ProductVariant[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 }
 
 model ProductVariant {
@@ -91,6 +105,8 @@ model ProductVariant {
   quantity    Int
   picture     String
   OrderDetail OrderDetail[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 model Category {
@@ -101,6 +117,8 @@ model Category {
   Product        Product[]
   SubCategory    SubCategory[]
   CategoryBanner CategoryBanner[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 }
 
 model SubCategory {
@@ -111,6 +129,8 @@ model SubCategory {
   desc       String
   category   Category  @relation(fields: [categoryId], references: [id])
   Product    Product[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model CategoryBanner {
@@ -119,4 +139,6 @@ model CategoryBanner {
   picture    String
   type       Int
   category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

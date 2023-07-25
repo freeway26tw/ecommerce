@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const { checkUserExist, createUser } = require('./controller.js')
 const createError = require('http-errors')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
