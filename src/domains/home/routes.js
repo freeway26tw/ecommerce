@@ -44,10 +44,35 @@ router.get('/hot', async (req, res, next) => {
   }
 })
 
+router.get('/category/head', async (req, res, next) => {
+  try {
+        const categories = await prisma.category.findMany({
+          include: {
+            SubCategory: {
+              select: {
+                Product: {
+                  include: {
+                    ProductVariant: true,
+                  },
+                },
+              },
+            },
+          },
+        })
+    res.json({
+      code: 1,
+      msg: 'Success',
+      result: categories,
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/banner', async (req, res, next) => {
   try {
     const homeBanner = await prisma.category.findMany({})
-    homeBanner.map(banner => banner.type = '1')
+    homeBanner.map((banner) => (banner.type = '1'))
     res.json({
       code: 1,
       msg: 'Success',
