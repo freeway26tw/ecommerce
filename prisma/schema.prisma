@@ -39,8 +39,6 @@ model UserAddress {
 model Order {
   id          String        @id @default(uuid())
   userId      String
-  total       Int
-  paymentId   String
   user        User          @relation(fields: [userId], references: [id])
   OrderDetail OrderDetail[]
   createdAt   DateTime      @default(now())

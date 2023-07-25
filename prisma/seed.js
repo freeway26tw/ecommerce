@@ -1,11 +1,14 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
+const bcrypt = require('bcryptjs')
 
 async function main() {
+  const password = 'titaner'
+  const bcryptPassword = await bcrypt.hash(password, 10)
   const user = await prisma.user.create({
     data: {
       account: 'rabbit',
-      password: 'titaner',
+      password: bcryptPassword,
       name: 'yoooo',
     },
   })
@@ -40,7 +43,7 @@ async function main() {
     },
   })
 
-  await prisma.product.create({
+  const product = await prisma.product.create({
     data: {
       sellerId: seller.id,
       name: '夢幻級帆布鞋',
@@ -57,6 +60,24 @@ async function main() {
           desc: '珍藏好物',
           picture:
             'https://res.cloudinary.com/dvobyld0o/image/upload/v1690195490/Ecommerce/1338948666-1043553915_lk4khy.jpg',
+        },
+      },
+    },
+  })
+
+  const newProductVariant = await prisma.productVariant.findFirst({
+    where: {
+      productId: product.id
+    }
+  })
+
+  await prisma.order.create({
+    data: {
+      userId: user.id,
+      OrderDetails: {
+        create: {
+          ProductVariantId: newProductVariant.id,
+          quantity: 1
         },
       },
     },

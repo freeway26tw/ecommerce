@@ -33,8 +33,6 @@ CREATE TABLE `UserAddress` (
 CREATE TABLE `Order` (
     `id` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
-    `total` INTEGER NOT NULL,
-    `paymentId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
