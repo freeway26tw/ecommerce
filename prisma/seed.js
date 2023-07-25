@@ -24,7 +24,7 @@ async function main() {
     data: {
       name: '兔兔專屬',
       picture:
-        'https://res.cloudinary.com/dvobyld0o/image/upload/v1690129977/Ecommerce/71croVPqVuL_e9itf2.jpg',
+        'https://res.cloudinary.com/dvobyld0o/image/upload/v1690277179/Ecommerce/draw-banner-cute-bunny-easter-spring_45130-1604_wikhot.jpg',
       desc: '兔兔專屬',
       SubCategory: {
         create: {
