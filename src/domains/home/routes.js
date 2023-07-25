@@ -30,14 +30,28 @@ router.get('/hot', async (req, res, next) => {
       take: 10,
       orderBy: {
         OrderDetail: {
-          _count: 'desc'
-        }
+          _count: 'desc',
+        },
       },
     })
     res.json({
       code: 1,
       msg: 'Success',
       result: hotProduct,
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/banner', async (req, res, next) => {
+  try {
+    const homeBanner = await prisma.category.findMany({})
+    homeBanner.map(banner => banner.type = '1')
+    res.json({
+      code: 1,
+      msg: 'Success',
+      result: homeBanner,
     })
   } catch (error) {
     next(error)
