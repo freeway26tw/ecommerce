@@ -60,6 +60,10 @@ async function main() {
           desc: '珍藏好物',
           picture:
             'https://res.cloudinary.com/dvobyld0o/image/upload/v1690195490/Ecommerce/1338948666-1043553915_lk4khy.jpg',
+          mainPictures: JSON.stringify([
+            'https://res.cloudinary.com/dvobyld0o/image/upload/v1690306575/Ecommerce/mobile01-fe1ba6e8cab1e8db3f2625a194e97492_k9lzdo.png',
+            'https://res.cloudinary.com/dvobyld0o/image/upload/v1690306714/Ecommerce/maxresdefault_q8xquw.jpg',
+          ]),
         },
       },
     },

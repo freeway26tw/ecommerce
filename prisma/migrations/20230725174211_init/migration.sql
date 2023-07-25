@@ -97,6 +97,7 @@ CREATE TABLE `ProductVariant` (
     `price` DECIMAL(65, 30) NOT NULL,
     `quantity` INTEGER NOT NULL,
     `picture` VARCHAR(191) NOT NULL,
+    `mainPictures` TEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 

@@ -102,6 +102,7 @@ model ProductVariant {
   price       Decimal
   quantity    Int
   picture     String
+  mainPictures String @db.Text
   OrderDetail OrderDetail[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt

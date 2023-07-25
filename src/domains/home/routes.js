@@ -14,6 +14,7 @@ router.get('/new', async (req, res, next) => {
         },
       ],
     })
+    newProduct.map((e) => e.mainPictures = JSON.parse(e.mainPictures))
     res.json({
       code: 1,
       msg: 'Success',
@@ -34,6 +35,7 @@ router.get('/hot', async (req, res, next) => {
         },
       },
     })
+    hotProduct.map((e) => (e.mainPictures = JSON.parse(e.mainPictures)))
     res.json({
       code: 1,
       msg: 'Success',
