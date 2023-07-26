@@ -12,6 +12,30 @@ async function main() {
       name: 'yoooo',
     },
   })
+  
+  await prisma.userAddress.createMany({
+    data: [
+      {
+        userId: user.id,
+        address1: '重慶南路一段122號',
+        address2: '中正區',
+        city: '台北市',
+        zip: '100',
+        country: '台灣',
+        mobile: '110',
+      },
+      {
+        userId: user.id,
+        address1: '忠孝東路1段1號',
+        address2: '中正區',
+        city: '台北市',
+        zip: '100',
+        country: '台灣',
+        mobile: '110',
+      },
+    ],
+  })
+
   const seller = await prisma.user.create({
     data: {
       account: 'titaner',
@@ -71,8 +95,8 @@ async function main() {
 
   const newProductVariant = await prisma.productVariant.findFirst({
     where: {
-      productId: product.id
-    }
+      productId: product.id,
+    },
   })
 
   await prisma.order.create({
@@ -81,7 +105,7 @@ async function main() {
       OrderDetail: {
         create: {
           productVariantId: newProductVariant.id,
-          quantity: 1
+          quantity: 1,
         },
       },
     },
