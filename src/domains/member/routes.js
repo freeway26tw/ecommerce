@@ -6,8 +6,15 @@ const prisma = new PrismaClient()
 
 router.get('/order/pre', async (req, res, next) => {
   try {
-    const address = prisma.userAddress.findMany({
-      
+    const address = await prisma.userAddress.findMany({})
+    address.map((e) => {
+      e.fullLocation = [...e.city, ...e.address2].join('')
+      e.address = e.address1
+    })
+    res.json({
+      code: 1,
+      msg: 'Success',
+      result: address,
     })
   } catch (error) {
     next(error)
