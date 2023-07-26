@@ -6,11 +6,16 @@ const prisma = new PrismaClient()
 
 router.get('/', async (req, res, next) => {
   try {
-    const goods = await prisma.productVariant.findMany({})
+    const good = await prisma.productVariant.findUnique({
+      where: {
+        id: req.query.id
+      }
+    })
+    good.mainPictures = JSON.parse(good.mainPictures)
     res.json({
       code: 1,
       msg: 'Success',
-      result: goods,
+      result: good,
     })
   } catch (error) {
     next(error)
